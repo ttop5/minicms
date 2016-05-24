@@ -32,7 +32,7 @@ class Article(models.Model):
     column = models.ManyToManyField(Column, verbose_name='归属栏目')
 
     title = models.CharField('标题', max_length=256)
-    slug = models.CharField('网址', max_length=256, db_index=True)
+    slug = models.CharField('网址', max_length=256, unique=True)
 
     author = models.ForeignKey('auth.User', blank=True, null=True, verbose_name='作者')
     content = UEditorField('内容', height=300, width=1000,
@@ -48,7 +48,7 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('article', args=(self.slug,))
+        return reverse('article', args=(self.pk, self.slug))
 
     class Meta:
         verbose_name = '教程'
