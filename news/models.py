@@ -15,6 +15,9 @@ class Column(models.Model):
     slug = models.CharField('栏目网址', max_length=256, db_index=True)
     intro = models.TextField('栏目简介', default='')
 
+    nav_display = models.BooleanField('导航显示', default=False)
+    home_display = models.BooleanField('首页显示', default=False)
+
     def __str__(self):
         return self.name
 
